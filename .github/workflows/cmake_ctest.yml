@@ -7,7 +7,7 @@ env:
   BUILD_TYPE: Release
   BUILD_DIR: Builds
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
+  #DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
   
 # jobs are run in paralell on different machines
 # all steps run in series
@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false # show all errors for each platform (vs. cancel jobs on error)
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-11.0]
+        os: [windows-latest, ubuntu-latest]
         include:
         - os: windows-latest
           artifact: Windows
@@ -102,10 +102,10 @@ jobs:
         asset_name: ${{ env.PROJECT_NAME }}-Linux.zip
         asset_content_type: application/zip
 
-    - name: Upload MacOS Asset
-      uses: actions/upload-release-asset@v1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ env.PROJECT_NAME }}-MacOS.zip
-        asset_name: ${{ env.PROJECT_NAME }}-MacOS.zip
-        asset_content_type: application/zip
+#    - name: Upload MacOS Asset
+#      uses: actions/upload-release-asset@v1
+#      with:
+#        upload_url: ${{ steps.create_release.outputs.upload_url }}
+#        asset_path: ./${{ env.PROJECT_NAME }}-MacOS.zip
+#        asset_name: ${{ env.PROJECT_NAME }}-MacOS.zip
+#        asset_content_type: application/zip
